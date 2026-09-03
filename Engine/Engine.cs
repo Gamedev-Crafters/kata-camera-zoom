@@ -13,6 +13,20 @@ static partial class Engine
     /// </summary>
     public static float TimeDelta { get; private set; }
 
+    /// <summary>
+    /// The current window resolution in pixels.
+    /// </summary>
+    public static Vector2 Resolution
+    {
+        get
+        {
+            int width;
+            int height;
+            SDL.SDL_GetWindowSize(Window, out width, out height);
+            return new Vector2(width, height);
+        }
+    }
+
     private static void Main(string[] args)
     {
         Start();

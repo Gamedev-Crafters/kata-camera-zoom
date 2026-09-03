@@ -9,6 +9,7 @@
     <AppendPlatformToOutputPath>false</AppendPlatformToOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Tests\**\*.cs" />
     <None Update="Assets\**\*" CopyToOutputDirectory="PreserveNewest" />
     <None Update="Libraries\**\*" CopyToOutputDirectory="PreserveNewest" TargetPath="%(Filename)%(Extension)" />
   </ItemGroup>
