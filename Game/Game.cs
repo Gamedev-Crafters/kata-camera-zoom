@@ -4,7 +4,7 @@ using System.Collections.Generic;
 class Game
 {
     public static readonly string Title = "Minimalist Game Framework";
-    public static readonly Vector2 Resolution = new Vector2(128, 128);
+    public static readonly Vector2 InitialResolution = new Vector2(128, 128);
 
     // Define some constants controlling animation speed:
     static readonly float Framerate = 10;
@@ -15,7 +15,7 @@ class Game
     Texture texBackground = Engine.LoadTexture("background.png");
 
     // Keep track of the knight's state:
-    Vector2 knightPosition = Resolution / 2;
+    Vector2 knightPosition = InitialResolution / 2;
     bool knightFaceLeft = false;
     float knightFrameIndex = 0;
 

@@ -52,8 +52,8 @@ static partial class Engine
             Game.Title,
             SDL.SDL_WINDOWPOS_CENTERED_DISPLAY(0),
             SDL.SDL_WINDOWPOS_CENTERED_DISPLAY(0),
-            (int)Game.Resolution.X,
-            (int)Game.Resolution.Y,
+            (int)Game.InitialResolution.X,
+            (int)Game.InitialResolution.Y,
             SDL.SDL_WindowFlags.SDL_WINDOW_RESIZABLE);
 
         if (Window == IntPtr.Zero)
