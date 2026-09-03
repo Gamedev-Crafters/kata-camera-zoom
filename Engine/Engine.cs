@@ -6,7 +6,6 @@ static partial class Engine
 {
     private static IntPtr Window;
     private static bool Fullscreen;
-    private static Texture RenderTarget;
     private static Game Game;
 
     /// <summary>
@@ -55,7 +54,7 @@ static partial class Engine
             SDL.SDL_WINDOWPOS_CENTERED_DISPLAY(0),
             (int)Game.Resolution.X,
             (int)Game.Resolution.Y,
-            0);
+            SDL.SDL_WindowFlags.SDL_WINDOW_RESIZABLE);
 
         if (Window == IntPtr.Zero)
         {
@@ -68,9 +67,6 @@ static partial class Engine
         {
             throw new Exception("Failed to create renderer.");
         }
-
-        IntPtr renderTargetHandle = SDL.SDL_CreateTexture(Renderer, SDL.SDL_PIXELFORMAT_RGBA8888, (int)SDL.SDL_TextureAccess.SDL_TEXTUREACCESS_TARGET, (int)Game.Resolution.X, (int)Game.Resolution.Y);
-        RenderTarget = new Texture(renderTargetHandle, (int)Game.Resolution.X, (int)Game.Resolution.Y);
 
         // ======================================================================================
         // Instantiate the game object
@@ -100,28 +96,12 @@ static partial class Engine
                 SDL.SDL_SetWindowFullscreen(Window, Fullscreen ? (uint)SDL.SDL_WindowFlags.SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
             }
 
-            // Clear and start drawing into the render target:
-            SDL.SDL_SetRenderTarget(Renderer, RenderTarget.Handle);
+            // Clear
             SDL.SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
             SDL.SDL_RenderClear(Renderer);
 
             // Update game logic:
             Game.Update();
-
-            // Figure out how to scale our render target to fill the window:
-            int windowWidth, windowHeight;
-            SDL.SDL_GetWindowSize(Window, out windowWidth, out windowHeight);
-            float renderTargetScale = ((float)windowWidth / windowHeight > Game.Resolution.X / Game.Resolution.Y)
-                ? windowHeight / Game.Resolution.Y
-                : windowWidth / Game.Resolution.X;
-
-            // Copy the render target to the screen:
-            SDL.SDL_SetRenderTarget(Renderer, IntPtr.Zero);
-            SDL.SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
-            SDL.SDL_RenderClear(Renderer);
-            Vector2 renderTargetSize = Game.Resolution * renderTargetScale;
-            Vector2 renderTargetPos = 0.5f * (new Vector2(windowWidth, windowHeight) - renderTargetSize);
-            DrawTexture(RenderTarget, renderTargetPos, size: renderTargetSize, scaleMode: TextureScaleMode.Nearest);
 
             // Present the screen:
             SDL.SDL_RenderPresent(Renderer);
