@@ -23,7 +23,7 @@ class Game
         Engine.DrawRectSolid(rect, color);
     }
 
-    bool DoBoundsContainPoint(Bounds2 rect, Vector2 point)
+    internal static bool DoBoundsContainPoint(Bounds2 rect, Vector2 point)
     {
         Vector2 local_point = point - rect.Position;
         return local_point.X >= 0 && local_point.X <= rect.Size.X &&
