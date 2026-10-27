@@ -26,3 +26,5 @@ toca definir qué es una cámara y cómo construirla. Por definición, solo nece
 las coordenadas reales y relativas de un mismo objeto.
 
 añadimos tests concretos para la creacion de camaras
+
+la situacion más sencilla es cuando las coordenadas relativas son precisamente la pantalla completa

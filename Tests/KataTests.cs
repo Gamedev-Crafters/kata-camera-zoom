@@ -64,13 +64,26 @@ public class KataTests
         Bounds2 fullscreen = new(new Vector2(0, 0), new Vector2(1, 1));
         Camera camera = Camera.fromProjected(red_thing, fullscreen);
         Assert.That(camera.toScreenCoords(red_thing), Is.EqualTo(fullscreen));
+        Assert.That(camera.toScreenCoords(red_thing.Position), Is.EqualTo(new Vector2(0,0)));
+        Assert.That(camera.toScreenCoords(red_thing.Position + red_thing.Size), Is.EqualTo(new Vector2(1,1)));
     }
 }
 
 internal class Camera
 {
-    internal static Camera fromProjected(Bounds2 red_thing, Bounds2 expected_red_thing)
+    Bounds2 world_seen;
+
+    public Camera(Bounds2 world_seen)
     {
+        this.world_seen = world_seen;
+    }
+
+    internal static Camera fromProjected(Bounds2 thing_in_world_coords, Bounds2 thing_in_camera_coords)
+    {
+        if (thing_in_camera_coords.Equals(new Bounds2(new Vector2(0,0), new Vector2(1,1))))
+        {
+            return new Camera(thing_in_world_coords);
+        }
         throw new NotImplementedException();
     }
 
