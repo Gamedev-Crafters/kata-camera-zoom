@@ -147,20 +147,14 @@ internal class Camera
 
     internal static Camera fromProjected(Bounds2 thing_in_world_coords, Bounds2 thing_in_camera_coords)
     {
-        if (thing_in_camera_coords.Equals(new Bounds2(new Vector2(0,0), new Vector2(1,1))))
-        {
-            return new Camera(thing_in_world_coords);
-        }
-        if (thing_in_camera_coords.Size.Y == 1 && thing_in_camera_coords.Position.Y == 0)
-        {
-            float x_size = thing_in_camera_coords.Size.X;
-            float x_pos = thing_in_camera_coords.Position.X;
-            return new Camera(new Bounds2(
-                thing_in_world_coords.Position - new Vector2(thing_in_world_coords.Size.X * (x_pos / x_size), 0), 
-                new Vector2(thing_in_world_coords.Size.X / x_size, thing_in_world_coords.Size.Y)
-            ));
-        }
-        throw new NotImplementedException();
+        float x_size = thing_in_camera_coords.Size.X;
+        float x_pos = thing_in_camera_coords.Position.X;
+        float y_size = thing_in_camera_coords.Size.Y;
+        float y_pos = thing_in_camera_coords.Position.Y;
+        return new Camera(new Bounds2(
+            thing_in_world_coords.Position - new Vector2(thing_in_world_coords.Size.X * (x_pos / x_size), thing_in_world_coords.Size.Y * (y_pos / y_size)), 
+            new Vector2(thing_in_world_coords.Size.X / x_size, thing_in_world_coords.Size.Y / y_size)
+        ));
     }
 
     internal Bounds2 toScreenCoords(Bounds2 rect)
