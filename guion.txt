@@ -52,3 +52,6 @@ De hecho, hay otros dos caminos:
 - usar invariantes: antes y despues del zoom, .toScreenCoords(cursor) debe ser el mismo. De ahi podemos ir despejando variables.
 - usar el método ya hecho: la camara que buscamos es aquella que transforma el cursor original en uno con la misma posicion pero distinto tamaño.
 Tomamos este último camino por ser el más rápido para la implementación, y usamos las invariantes para testearlo.
+
+Ya solo falta usar nuestra flamante camara en la aplicacion real. Ojo, la API de dibujo espera coordenadas en pixeles, así que multiplicamos
+las coordenadas relativas [0,1]x[0,1] por la resolución de la pantalla.
