@@ -41,3 +41,9 @@ repetimos: buscamos el siguiente hardcodeado que nos permita avanzar, en el que 
 el numero que queremos generalizar
 
 una vez tenemos varias generalizaciones, podemos generalizar entre ellas
+
+Ahora que podemos crear cualquier camara, toca implementar el zoom.
+Seguimos la misma estrategia:
+- escribir el codigo ideal
+- hacer tests con valores hardcodeados sencillos
+- generalizar a partir de estos valores

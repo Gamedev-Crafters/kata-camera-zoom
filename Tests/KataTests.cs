@@ -25,7 +25,7 @@ public class KataTests
         AssertBoundsEqual(camera.toScreenCoords(red_thing), expected_red_thing);
         Vector2 cursor = new(-1, 0);
         Assert.That(camera.toScreenCoords(cursor), Is.EqualTo(new Vector2(0.1f, 0.5f)));
-        // zoom in
+        camera = camera.zoomAtCursor(cursor, 0.1f, 0.8f);
         expected_red_thing = new(new Vector2(0.5f, 0.5f), new Vector2(0.8f, 0.8f));
         Assert.That(camera.toScreenCoords(red_thing), Is.EqualTo(expected_red_thing));
     }
@@ -41,7 +41,7 @@ public class KataTests
         AssertBoundsEqual(camera.toScreenCoords(red_thing), expected_red_thing);
         Vector2 cursor = new(1, 0);
         Assert.That(camera.toScreenCoords(cursor), Is.EqualTo(new Vector2(1.3f, 0.5f)));
-        // zoom out
+        camera = camera.zoomAtCursor(cursor, 0.8f, 0.1f);
         expected_red_thing = new(new Vector2(0.2f, 0.5f), new Vector2(0.1f, 0.1f));
         Assert.That(camera.toScreenCoords(red_thing), Is.EqualTo(expected_red_thing));
     }
@@ -179,5 +179,10 @@ internal class Camera
             centered.X / this.world_seen.Size.X,
             centered.Y / this.world_seen.Size.Y
         );
+    }
+
+    internal Camera zoomAtCursor(Vector2 cursor, float old_relative_size, float new_relative_size)
+    {
+        throw new NotImplementedException();
     }
 }
