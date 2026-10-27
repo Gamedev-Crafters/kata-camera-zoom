@@ -12,4 +12,18 @@ public class KataTests
 
         Assert.That(result, Is.True);
     }
+
+    [Test]
+    public void IdealGoal()
+    {
+        // red thing is small and to the left
+        // put cursor in left side
+        // zoom in
+        // red thing should now be big and in the center
+
+        // red thing is big and in the center
+        // put cursor in right side
+        // zoom out
+        // red thing should now be small and on the right
+    }
 }
