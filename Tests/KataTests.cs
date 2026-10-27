@@ -160,17 +160,11 @@ internal class Camera
                 new Vector2(thing_in_world_coords.Size.X * 2, thing_in_world_coords.Size.Y)
             ));
         }
-        if (thing_in_camera_coords.Size.Equals(new Vector2(0.8f,1)) && thing_in_camera_coords.Position.Equals(new Vector2(0, 0)))
+        if (thing_in_camera_coords.Size.Equals(new Vector2(0.8f,1)) && thing_in_camera_coords.Position.Y == 0)
         {
+            float x = thing_in_camera_coords.Position.X;
             return new Camera(new Bounds2(
-                thing_in_world_coords.Position - new Vector2(thing_in_world_coords.Size.X * 0, 0), 
-                new Vector2(thing_in_world_coords.Size.X / 0.8f, thing_in_world_coords.Size.Y)
-            ));
-        }
-        if (thing_in_camera_coords.Size.Equals(new Vector2(0.8f,1)) && thing_in_camera_coords.Position.Equals(new Vector2(0.1f, 0)))
-        {
-            return new Camera(new Bounds2(
-                thing_in_world_coords.Position - new Vector2(thing_in_world_coords.Size.X * 0.1f / 0.8f, 0), 
+                thing_in_world_coords.Position - new Vector2(thing_in_world_coords.Size.X * (x / 0.8f), 0), 
                 new Vector2(thing_in_world_coords.Size.X / 0.8f, thing_in_world_coords.Size.Y)
             ));
         }
