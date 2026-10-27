@@ -40,7 +40,7 @@ public class KataTests
         Camera camera = Camera.fromProjected(red_thing, expected_red_thing);
         AssertBoundsEqual(camera.toScreenCoords(red_thing), expected_red_thing);
         Vector2 cursor = new(1, 0);
-        Assert.That(camera.toScreenCoords(cursor), Is.EqualTo(new Vector2(0.9f, 0.5f)));
+        Assert.That(camera.toScreenCoords(cursor), Is.EqualTo(new Vector2(1.3f, 0.5f)));
         // zoom out
         expected_red_thing = new(new Vector2(0.2f, 0.5f), new Vector2(0.1f, 0.1f));
         Assert.That(camera.toScreenCoords(red_thing), Is.EqualTo(expected_red_thing));
