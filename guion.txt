@@ -30,3 +30,5 @@ añadimos tests concretos para la creacion de camaras
 la situacion más sencilla es cuando las coordenadas relativas son precisamente la pantalla completa
 
 la siguiente situacion más sencilla es cuando las coordenadas relativas son precisamente la mitad vertical de la pantalla completa
+
+después, la otra mitad vertical
