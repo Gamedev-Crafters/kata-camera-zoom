@@ -151,21 +151,13 @@ internal class Camera
         {
             return new Camera(thing_in_world_coords);
         }
-        // if (thing_in_camera_coords.Equals(new Bounds2(new Vector2( <x>, 0), new Vector2(0.5f,1))))  <-- my ideal code
-        if (thing_in_camera_coords.Size.Equals(new Vector2(0.5f,1)) && thing_in_camera_coords.Position.Y == 0)
+        if (thing_in_camera_coords.Size.Y == 1 && thing_in_camera_coords.Position.Y == 0)
         {
-            float x = thing_in_camera_coords.Position.X;
+            float x_size = thing_in_camera_coords.Size.X;
+            float x_pos = thing_in_camera_coords.Position.X;
             return new Camera(new Bounds2(
-                thing_in_world_coords.Position - new Vector2(thing_in_world_coords.Size.X * (x / 0.5f), 0), 
-                new Vector2(thing_in_world_coords.Size.X / 0.5f, thing_in_world_coords.Size.Y)
-            ));
-        }
-        if (thing_in_camera_coords.Size.Equals(new Vector2(0.8f,1)) && thing_in_camera_coords.Position.Y == 0)
-        {
-            float x = thing_in_camera_coords.Position.X;
-            return new Camera(new Bounds2(
-                thing_in_world_coords.Position - new Vector2(thing_in_world_coords.Size.X * (x / 0.8f), 0), 
-                new Vector2(thing_in_world_coords.Size.X / 0.8f, thing_in_world_coords.Size.Y)
+                thing_in_world_coords.Position - new Vector2(thing_in_world_coords.Size.X * (x_pos / x_size), 0), 
+                new Vector2(thing_in_world_coords.Size.X / x_size, thing_in_world_coords.Size.Y)
             ));
         }
         throw new NotImplementedException();
