@@ -13,3 +13,8 @@ public void IdealGoal()
     // zoom out
     // red thing should now be small and on the right
 }
+
+
+"red thing is small and to the left" es descriptivo, nos sirve como assert 
+pero no como arrange, asi que cambiamos el arrange para que este en el
+lenguaje de nuestro dominio: world units
