@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
 
 [TestFixture]
@@ -67,6 +68,17 @@ public class KataTests
         Assert.That(camera.toScreenCoords(red_thing.Position), Is.EqualTo(new Vector2(0,0)));
         Assert.That(camera.toScreenCoords(red_thing.Position + red_thing.Size), Is.EqualTo(new Vector2(1,1)));
     }
+
+    [Test]
+    public void CreateCameraFromProjectedIntoFullscreenAndCheckOnlyPos()
+    {
+        // red_thing could be any random value
+        Bounds2 red_thing = new(new Vector2(1, 2), new Vector2(3, 4));
+        Bounds2 fullscreen = new(new Vector2(0, 0), new Vector2(1, 1));
+        Camera camera = Camera.fromProjected(red_thing, fullscreen);
+        Assert.That(camera.toScreenCoords(red_thing.Position), Is.EqualTo(new Vector2(0,0)));
+        Assert.That(camera.toScreenCoords(red_thing.Position + red_thing.Size), Is.EqualTo(new Vector2(1,1)));
+    }
 }
 
 internal class Camera
@@ -92,8 +104,12 @@ internal class Camera
         throw new NotImplementedException();
     }
 
-    internal Vector2 toScreenCoords(Vector2 red_thing)
+    internal Vector2 toScreenCoords(Vector2 pos)
     {
-        throw new NotImplementedException();
+        Vector2 centered = pos - this.world_seen.Position;
+        return new(
+            centered.X / this.world_seen.Size.X,
+            centered.Y / this.world_seen.Size.Y
+        );
     }
 }
