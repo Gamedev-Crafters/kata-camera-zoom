@@ -99,9 +99,11 @@ internal class Camera
         throw new NotImplementedException();
     }
 
-    internal Bounds2 toScreenCoords(Bounds2 red_thing)
+    internal Bounds2 toScreenCoords(Bounds2 rect)
     {
-        throw new NotImplementedException();
+        Vector2 top_left = this.toScreenCoords(rect.Position);
+        Vector2 bottom_right = this.toScreenCoords(rect.Position + rect.Size);
+        return Bounds2.fromCorners(top_left, bottom_right); 
     }
 
     internal Vector2 toScreenCoords(Vector2 pos)

@@ -33,6 +33,11 @@ struct Bounds2
         Size = new Vector2(width, height);
     }
 
+    public static Bounds2 fromCorners(Vector2 top_left, Vector2 bottom_right)
+    {
+        return new(top_left, bottom_right - top_left);
+    }
+
     public override string ToString()
     {
         return string.Format("({0}, {1})", Position, Size);
