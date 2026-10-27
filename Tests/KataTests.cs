@@ -135,6 +135,15 @@ public class KataTests
         Assert.That(camera.toScreenCoords(red_thing.Position + red_thing.Size), Is.EqualTo(new Vector2(0.9f,1)));
     }
 
+    [Test]
+    public void ZoomInSimplest()
+    {
+        Camera camera = new(new Bounds2(new Vector2(0, 0), new Vector2(1, 1)));
+        camera = camera.zoomAtCursor(new Vector2(0, 0), 1, 0.5f);
+        Assert.That(camera.toScreenCoords(new Vector2(0,0)), Is.EqualTo(new Vector2(0,0)));
+        Assert.That(camera.toScreenCoords(new Vector2(1,1)), Is.EqualTo(new Vector2(0.5f,0.5f)));
+    }
+
     private static void AssertBoundsEqual(Bounds2 actual, Bounds2 expected)
     {
         Assert.That(actual.Position.X, Is.EqualTo(expected.Position.X).Within(0.000001f));
