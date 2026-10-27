@@ -22,7 +22,7 @@ public class KataTests
         Bounds2 red_thing = new(red_thing_center, red_thing_size);
         Bounds2 expected_red_thing = new(new Vector2(0.2f, 0.5f), new Vector2(0.1f, 0.1f));
         Camera camera = Camera.fromProjected(red_thing, expected_red_thing);
-        Assert.That(camera.toScreenCoords(red_thing), Is.EqualTo(expected_red_thing));
+        AssertBoundsEqual(camera.toScreenCoords(red_thing), expected_red_thing);
         Vector2 cursor = new(-1, 0);
         Assert.That(camera.toScreenCoords(cursor), Is.EqualTo(new Vector2(0.1f, 0.5f)));
         // zoom in
@@ -38,7 +38,7 @@ public class KataTests
         Bounds2 red_thing = new(red_thing_center, red_thing_size);
         Bounds2 expected_red_thing = new(new Vector2(0.5f, 0.5f), new Vector2(0.8f, 0.8f));
         Camera camera = Camera.fromProjected(red_thing, expected_red_thing);
-        Assert.That(camera.toScreenCoords(red_thing), Is.EqualTo(expected_red_thing));
+        AssertBoundsEqual(camera.toScreenCoords(red_thing), expected_red_thing);
         Vector2 cursor = new(1, 0);
         Assert.That(camera.toScreenCoords(cursor), Is.EqualTo(new Vector2(0.9f, 0.5f)));
         // zoom out
@@ -54,7 +54,7 @@ public class KataTests
         Bounds2 red_thing = new(red_thing_center, red_thing_size);
         Bounds2 expected_red_thing = new(new Vector2(0.2f, 0.5f), new Vector2(0.1f, 0.1f));
         Camera camera = Camera.fromProjected(red_thing, expected_red_thing);
-        Assert.That(camera.toScreenCoords(red_thing), Is.EqualTo(expected_red_thing));
+        AssertBoundsEqual(camera.toScreenCoords(red_thing), expected_red_thing);
     }
 
     [Test]
@@ -64,7 +64,7 @@ public class KataTests
         Bounds2 red_thing = new(new Vector2(1, 2), new Vector2(3, 4));
         Bounds2 fullscreen = new(new Vector2(0, 0), new Vector2(1, 1));
         Camera camera = Camera.fromProjected(red_thing, fullscreen);
-        Assert.That(camera.toScreenCoords(red_thing), Is.EqualTo(fullscreen));
+        AssertBoundsEqual(camera.toScreenCoords(red_thing), fullscreen);
         Assert.That(camera.toScreenCoords(red_thing.Position), Is.EqualTo(new Vector2(0,0)));
         Assert.That(camera.toScreenCoords(red_thing.Position + red_thing.Size), Is.EqualTo(new Vector2(1,1)));
     }
@@ -133,6 +133,14 @@ public class KataTests
         Camera camera = Camera.fromProjected(red_thing, fullscreen);
         Assert.That(camera.toScreenCoords(red_thing.Position), Is.EqualTo(new Vector2(0.1f,0)));
         Assert.That(camera.toScreenCoords(red_thing.Position + red_thing.Size), Is.EqualTo(new Vector2(0.9f,1)));
+    }
+
+    private static void AssertBoundsEqual(Bounds2 actual, Bounds2 expected)
+    {
+        Assert.That(actual.Position.X, Is.EqualTo(expected.Position.X).Within(0.000001f));
+        Assert.That(actual.Position.Y, Is.EqualTo(expected.Position.Y).Within(0.000001f));
+        Assert.That(actual.Size.X, Is.EqualTo(expected.Size.X).Within(0.000001f));
+        Assert.That(actual.Size.Y, Is.EqualTo(expected.Size.Y).Within(0.000001f));
     }
 }
 
