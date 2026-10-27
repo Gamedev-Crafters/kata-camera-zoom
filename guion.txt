@@ -21,3 +21,6 @@ lenguaje de nuestro dominio: world units
 
 no tenemos un dominio para "seen from the camera", asi que nos lo inventamos;
 la mejor opcion es "el rectangulo relativo al viewport", en el rango [0,1] x [0,1]
+
+toca definir qué es una cámara y cómo construirla. Por definición, solo necesitamos
+las coordenadas reales y relativas de un mismo objeto.

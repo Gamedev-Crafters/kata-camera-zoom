@@ -16,11 +16,11 @@ public class KataTests
     [Test]
     public void IdealGoal()
     {
-        Camera camera = ???;
         Vector2 red_thing_center = new(0, 0);
         Vector2 red_thing_size = new(1, 1);
         Bounds2 red_thing = new(red_thing_center, red_thing_size);
         Bounds2 expected_red_thing = new(new Vector2(0.2f, 0.5f), new Vector2(0.1f, 0.1f));
+        Camera camera = Camera.fromProjected(red_thing, expected_red_thing);
         Assert.That(camera.toScreenCoords(red_thing) == expected_red_thing);
         Vector2 cursor = new(-1, 0);
         Assert.That(camera.toScreenCoords(cursor) == new Vector2(0.1f, 0.5f));
@@ -32,11 +32,11 @@ public class KataTests
     [Test]
     public void IdealGoal2()
     {
-        Camera camera = ???;
         Vector2 red_thing_center = new(0, 0);
         Vector2 red_thing_size = new(1, 1);
         Bounds2 red_thing = new(red_thing_center, red_thing_size);
         Bounds2 expected_red_thing = new(new Vector2(0.5f, 0.5f), new Vector2(0.8f, 0.8f));
+        Camera camera = Camera.fromProjected(red_thing, expected_red_thing);
         Assert.That(camera.toScreenCoords(red_thing) == expected_red_thing);
         Vector2 cursor = new(1, 0);
         Assert.That(camera.toScreenCoords(cursor) == new Vector2(0.9f, 0.5f));
