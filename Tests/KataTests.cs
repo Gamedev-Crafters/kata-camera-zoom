@@ -44,6 +44,27 @@ public class KataTests
         expected_red_thing = new(new Vector2(0.2f, 0.5f), new Vector2(0.1f, 0.1f));
         Assert.That(camera.toScreenCoords(red_thing), Is.EqualTo(expected_red_thing));
     }
+
+    [Test]
+    public void CreateCameraFromProjected()
+    {
+        Vector2 red_thing_center = new(0, 0);
+        Vector2 red_thing_size = new(1, 1);
+        Bounds2 red_thing = new(red_thing_center, red_thing_size);
+        Bounds2 expected_red_thing = new(new Vector2(0.2f, 0.5f), new Vector2(0.1f, 0.1f));
+        Camera camera = Camera.fromProjected(red_thing, expected_red_thing);
+        Assert.That(camera.toScreenCoords(red_thing), Is.EqualTo(expected_red_thing));
+    }
+
+    [Test]
+    public void CreateCameraFromProjectedIntoFullscreen()
+    {
+        // red_thing could be any random value
+        Bounds2 red_thing = new(new Vector2(1, 2), new Vector2(3, 4));
+        Bounds2 fullscreen = new(new Vector2(0, 0), new Vector2(1, 1));
+        Camera camera = Camera.fromProjected(red_thing, fullscreen);
+        Assert.That(camera.toScreenCoords(red_thing), Is.EqualTo(fullscreen));
+    }
 }
 
 internal class Camera
