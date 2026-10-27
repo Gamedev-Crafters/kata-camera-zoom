@@ -17,17 +17,17 @@ public class KataTests
     public void IdealGoal()
     {
         // red thing's center is at (0, 0)
-        // seen from the camera, it is small and to the left
+        // seen from the camera, it is rect(size=0.1, pos=(0.2, 0.5))
         // put cursor in (-1, 0)
-        // seen from the camera, the cursor is very to the left
+        // seen from the camera, the cursor is pos=(0.1, 0.5)
         // zoom in
-        // red thing should now be big and in the center
+        // red thing should now be rect(size=0.8, pos=(0.5, 0.5))
 
         // red thing's center is at (0, 0)
-        // seen from the camera, it is big and in the center
+        // seen from the camera, it is rect(size=0.8, pos=(0.5, 0.5))
         // put cursor in (1, 0)
-        // seen from the caemra, the cursor in very to the right
+        // seen from the camera, the cursor in pos=(0.9, 0.5)
         // zoom out
-        // red thing should now be small and on the right
+        // red thing should now be rect(size=0.1, pos=(0.2, 0.5))
     }
 }

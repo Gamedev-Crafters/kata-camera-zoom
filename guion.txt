@@ -18,3 +18,6 @@ public void IdealGoal()
 "red thing is small and to the left" es descriptivo, nos sirve como assert 
 pero no como arrange, asi que cambiamos el arrange para que este en el
 lenguaje de nuestro dominio: world units
+
+no tenemos un dominio para "seen from the camera", asi que nos lo inventamos;
+la mejor opcion es "el rectangulo relativo al viewport", en el rango [0,1] x [0,1]
