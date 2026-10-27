@@ -131,12 +131,15 @@ internal class Camera
         }
         if (thing_in_camera_coords.Equals(new Bounds2(new Vector2(0,0), new Vector2(0.5f,1))))
         {
-            return new Camera(new Bounds2(thing_in_world_coords.Position, new Vector2(thing_in_world_coords.Size.X * 2, thing_in_world_coords.Size.Y)));
+            return new Camera(new Bounds2(
+                thing_in_world_coords.Position - new Vector2(thing_in_world_coords.Size.X * 0, 0),
+                new Vector2(thing_in_world_coords.Size.X * 2, thing_in_world_coords.Size.Y)
+            ));
         }
         if (thing_in_camera_coords.Equals(new Bounds2(new Vector2(0.5f,0), new Vector2(0.5f,1))))
         {
             return new Camera(new Bounds2(
-                thing_in_world_coords.Position - new Vector2(thing_in_world_coords.Size.X, 0), 
+                thing_in_world_coords.Position - new Vector2(thing_in_world_coords.Size.X * 1, 0), 
                 new Vector2(thing_in_world_coords.Size.X * 2, thing_in_world_coords.Size.Y)
             ));
         }

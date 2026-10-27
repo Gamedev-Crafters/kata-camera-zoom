@@ -34,3 +34,5 @@ la siguiente situacion más sencilla es cuando las coordenadas relativas son pre
 después, la otra mitad vertical
 
 por ultimo, la mitad vertical central
+
+probemos la generalización natural!
