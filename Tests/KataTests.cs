@@ -16,18 +16,32 @@ public class KataTests
     [Test]
     public void IdealGoal()
     {
-        // red thing's center is at (0, 0)
-        // seen from the camera, it is rect(size=0.1, pos=(0.2, 0.5))
-        // put cursor in (-1, 0)
-        // seen from the camera, the cursor is pos=(0.1, 0.5)
+        Camera camera = ???;
+        Vector2 red_thing_center = new(0, 0);
+        Vector2 red_thing_size = new(1, 1);
+        Bounds2 red_thing = new(red_thing_center, red_thing_size);
+        Bounds2 expected_red_thing = new(new Vector2(0.2f, 0.5f), new Vector2(0.1f, 0.1f));
+        Assert.That(camera.toScreenCoords(red_thing) == expected_red_thing);
+        Vector2 cursor = new(-1, 0);
+        Assert.That(camera.toScreenCoords(cursor) == new Vector2(0.1f, 0.5f));
         // zoom in
-        // red thing should now be rect(size=0.8, pos=(0.5, 0.5))
+        expected_red_thing = new(new Vector2(0.5f, 0.5f), new Vector2(0.8f, 0.8f));
+        Assert.That(camera.toScreenCoords(red_thing) == expected_red_thing);
+    }
 
-        // red thing's center is at (0, 0)
-        // seen from the camera, it is rect(size=0.8, pos=(0.5, 0.5))
-        // put cursor in (1, 0)
-        // seen from the camera, the cursor in pos=(0.9, 0.5)
+    [Test]
+    public void IdealGoal2()
+    {
+        Camera camera = ???;
+        Vector2 red_thing_center = new(0, 0);
+        Vector2 red_thing_size = new(1, 1);
+        Bounds2 red_thing = new(red_thing_center, red_thing_size);
+        Bounds2 expected_red_thing = new(new Vector2(0.5f, 0.5f), new Vector2(0.8f, 0.8f));
+        Assert.That(camera.toScreenCoords(red_thing) == expected_red_thing);
+        Vector2 cursor = new(1, 0);
+        Assert.That(camera.toScreenCoords(cursor) == new Vector2(0.9f, 0.5f));
         // zoom out
-        // red thing should now be rect(size=0.1, pos=(0.2, 0.5))
+        expected_red_thing = new(new Vector2(0.2f, 0.5f), new Vector2(0.1f, 0.1f));
+        Assert.That(camera.toScreenCoords(red_thing) == expected_red_thing);
     }
 }
