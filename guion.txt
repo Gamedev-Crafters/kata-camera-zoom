@@ -36,3 +36,6 @@ después, la otra mitad vertical
 por ultimo, la mitad vertical central
 
 probemos la generalización natural!
+
+repetimos: buscamos el siguiente hardcodeado que nos permita avanzar, en el que cambie
+el numero que queremos generalizar
