@@ -79,6 +79,17 @@ public class KataTests
         Assert.That(camera.toScreenCoords(red_thing.Position), Is.EqualTo(new Vector2(0,0)));
         Assert.That(camera.toScreenCoords(red_thing.Position + red_thing.Size), Is.EqualTo(new Vector2(1,1)));
     }
+
+    [Test]
+    public void CreateCameraFromProjectedIntoHalfscreenAndCheckOnlyPos()
+    {
+        // red_thing could be any random value
+        Bounds2 red_thing = new(new Vector2(1, 2), new Vector2(3, 4));
+        Bounds2 halfscreen = new(new Vector2(0, 0), new Vector2(0.5f, 1));
+        Camera camera = Camera.fromProjected(red_thing, halfscreen);
+        Assert.That(camera.toScreenCoords(red_thing.Position), Is.EqualTo(new Vector2(0,0)));
+        Assert.That(camera.toScreenCoords(red_thing.Position + red_thing.Size), Is.EqualTo(new Vector2(0.5f,1)));
+    }
 }
 
 internal class Camera
@@ -95,6 +106,10 @@ internal class Camera
         if (thing_in_camera_coords.Equals(new Bounds2(new Vector2(0,0), new Vector2(1,1))))
         {
             return new Camera(thing_in_world_coords);
+        }
+        if (thing_in_camera_coords.Equals(new Bounds2(new Vector2(0,0), new Vector2(0.5f,1))))
+        {
+            return new Camera(new Bounds2(thing_in_world_coords.Position, new Vector2(thing_in_world_coords.Size.X * 2, thing_in_world_coords.Size.Y)));
         }
         throw new NotImplementedException();
     }
