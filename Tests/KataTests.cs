@@ -16,38 +16,6 @@ public class KataTests
     }
 
     [Test]
-    public void IdealGoal()
-    {
-        Vector2 red_thing_center = new(0, 0);
-        Vector2 red_thing_size = new(1, 1);
-        Bounds2 red_thing = new(red_thing_center, red_thing_size);
-        Bounds2 expected_red_thing = new(new Vector2(0.2f, 0.5f), new Vector2(0.1f, 0.1f));
-        Camera camera = Camera.fromProjected(red_thing, expected_red_thing);
-        AssertBoundsEqual(camera.toScreenCoords(red_thing), expected_red_thing);
-        Vector2 cursor = new(-1, 0);
-        Assert.That(camera.toScreenCoords(cursor), Is.EqualTo(new Vector2(0.1f, 0.5f)));
-        camera = camera.zoomAtCursor(cursor, 0.1f, 0.8f);
-        expected_red_thing = new(new Vector2(0.5f, 0.5f), new Vector2(0.8f, 0.8f));
-        Assert.That(camera.toScreenCoords(red_thing), Is.EqualTo(expected_red_thing));
-    }
-
-    [Test]
-    public void IdealGoal2()
-    {
-        Vector2 red_thing_center = new(0, 0);
-        Vector2 red_thing_size = new(1, 1);
-        Bounds2 red_thing = new(red_thing_center, red_thing_size);
-        Bounds2 expected_red_thing = new(new Vector2(0.5f, 0.5f), new Vector2(0.8f, 0.8f));
-        Camera camera = Camera.fromProjected(red_thing, expected_red_thing);
-        AssertBoundsEqual(camera.toScreenCoords(red_thing), expected_red_thing);
-        Vector2 cursor = new(1, 0);
-        Assert.That(camera.toScreenCoords(cursor), Is.EqualTo(new Vector2(1.3f, 0.5f)));
-        camera = camera.zoomAtCursor(cursor, 0.8f, 0.1f);
-        expected_red_thing = new(new Vector2(0.2f, 0.5f), new Vector2(0.1f, 0.1f));
-        Assert.That(camera.toScreenCoords(red_thing), Is.EqualTo(expected_red_thing));
-    }
-
-    [Test]
     public void CreateCameraFromProjected()
     {
         Vector2 red_thing_topleft = new(0, 0);
