@@ -1,3 +1,4 @@
+using System.Runtime.Intrinsics.Arm;
 using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
 
@@ -49,9 +50,9 @@ public class KataTests
     [Test]
     public void CreateCameraFromProjected()
     {
-        Vector2 red_thing_center = new(0, 0);
+        Vector2 red_thing_topleft = new(0, 0);
         Vector2 red_thing_size = new(1, 1);
-        Bounds2 red_thing = new(red_thing_center, red_thing_size);
+        Bounds2 red_thing = new(red_thing_topleft, red_thing_size);
         Bounds2 expected_red_thing = new(new Vector2(0.2f, 0.5f), new Vector2(0.1f, 0.1f));
         Camera camera = Camera.fromProjected(red_thing, expected_red_thing);
         AssertBoundsEqual(camera.toScreenCoords(red_thing), expected_red_thing);
@@ -144,6 +145,21 @@ public class KataTests
         Assert.That(camera.toScreenCoords(new Vector2(1,1)), Is.EqualTo(new Vector2(0.5f,0.5f)));
     }
 
+    [Test]
+    public void ZoomGeneral()
+    {
+        // seen_world could be any random value
+        Bounds2 seen_world = new(new Vector2(1, 2), new Vector2(3, 4));
+        // cursor could be any random value
+        Vector2 cursor = new(5, 6);
+        Camera camera = new(seen_world);
+        Vector2 old_relative_cursor = camera.toScreenCoords(cursor);
+        // zoom values could be any random values
+        camera = camera.zoomAtCursor(cursor, 7, 8);
+        Vector2 new_relative_cursor = camera.toScreenCoords(cursor);
+        Assert.That(old_relative_cursor, Is.EqualTo(new_relative_cursor));
+    }
+
     private static void AssertBoundsEqual(Bounds2 actual, Bounds2 expected)
     {
         Assert.That(actual.Position.X, Is.EqualTo(expected.Position.X).Within(0.000001f));
@@ -190,8 +206,22 @@ internal class Camera
         );
     }
 
-    internal Camera zoomAtCursor(Vector2 cursor, float old_relative_size, float new_relative_size)
+    internal Vector2 toWorldCoords(Vector2 screen_pos)
     {
-        throw new NotImplementedException();
+        return this.world_seen.Position + new Vector2(
+            screen_pos.X * this.world_seen.Size.X,
+            screen_pos.Y * this.world_seen.Size.Y
+        );
+    }
+
+
+    internal Camera zoomAtCursor(Vector2 cursor_world_pos, float old_relative_size, float new_relative_size)
+    {
+        Vector2 old_relative_cursor = this.toScreenCoords(cursor_world_pos);
+        Bounds2 cursor = Bounds2.fromCorners(cursor_world_pos, this.toWorldCoords(old_relative_cursor + new Vector2(old_relative_size, old_relative_size)));
+        return fromProjected(
+            cursor,
+            new Bounds2(old_relative_cursor, new Vector2(new_relative_size, new_relative_size))
+        );
     }
 }

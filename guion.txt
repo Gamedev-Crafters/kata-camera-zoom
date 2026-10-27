@@ -47,3 +47,8 @@ Seguimos la misma estrategia:
 - escribir el codigo ideal
 - hacer tests con valores hardcodeados sencillos
 - generalizar a partir de estos valores
+
+De hecho, hay otros dos caminos:
+- usar invariantes: antes y despues del zoom, .toScreenCoords(cursor) debe ser el mismo. De ahi podemos ir despejando variables.
+- usar el método ya hecho: la camara que buscamos es aquella que transforma el cursor original en uno con la misma posicion pero distinto tamaño.
+Tomamos este último camino por ser el más rápido para la implementación, y usamos las invariantes para testearlo.
