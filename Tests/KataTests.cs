@@ -17,7 +17,24 @@ public class KataTests
     public void SeModificaRenderDelCuadrado()
     {
         Bounds2 cuadrado_metros = new Bounds2( position: new Vector2(0, 0), size: new Vector2(1, 1) );
-        // se ve como 100x100px;
+        // Viewport viewport = ...?;
+
+        // checkeamos por si acaso, no es estrictamente el test
+        Bounds2 cuadrado_pixeles = viewport.pixelesFromMetros(cuadrado_metros);
+        Assert.That(cuadrado_pixeles.Size, Is.EqualTo(new Vector2(100, 100)));
+        Assert.That(cuadrado_pixeles.Position, Is.EqualTo(new Vector2(0, 0)));
+
+        Vector2 raton_pixeles = new Vector2(0, 0);
+        // nos acercamos en un 200%;
+        Bounds2 cuadrado_nuevos_pixeles = viewport.pixelesFromMetros(cuadrado_metros);
+        Assert.That(cuadrado_nuevos_pixeles.Size, Is.EqualTo(new Vector2(200, 200)));
+    }
+
+    [Test]
+    public void SeModificaRenderDelCuadradoEnOtraPosicion()
+    {
+        Bounds2 cuadrado_metros = new Bounds2( position: new Vector2(1, 1), size: new Vector2(1, 1) );
+        // se ve como 100x100px y se ve en la pantalla arriba a la izquierda;
         Vector2 raton_pixeles = new Vector2(0, 0);
         // nos acercamos en un 200%;
         // se ve el doble de grande;
@@ -29,7 +46,7 @@ public class KataTests
     public void SeModificaViewport()
     {
         // nuestro viewport incluye ..., no incluye ...
-        // nuestro viewport es igual a ...;
+        // Viewport viewport = new Viewport ( 1m=100px, posicion (0m,0m) = arriba a la izquierda  )
         // el raton esta en 0, 0;
         // nos acercamos en un 200%;
         // nuestro viewport incluye ..., no incluye ...
@@ -40,7 +57,7 @@ public class KataTests
     public void SeModificaViewportDependiendoDelRaton()
     {
         // nuestro viewport incluye ..., no incluye ...
-        // nuestro viewport es igual a ...;
+        // Viewport viewport = new Viewport ( 1m=100px, posicion (0m,0m) = arriba a la izquierda  )
         // el raton esta en 123, 321;
         // nos acercamos en un 200%;
         // nuestro viewport incluye ..., no incluye ...
