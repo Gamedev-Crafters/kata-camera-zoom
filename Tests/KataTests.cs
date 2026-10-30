@@ -109,7 +109,6 @@ public class KataTests
     }
 
 
-
     // [Test]
     // public void MetrosYPixeles2()
     // {
@@ -137,11 +136,17 @@ internal class Viewport
     {
         if (this.resolucion_pixeles.Equals(new Vector2(400, 400)))
         {
-            return caja_visible_metros.Position + (posicion_pixeles / 100);
+            return caja_visible_metros.Position + new Vector2(
+                posicion_pixeles.X / 100,
+                posicion_pixeles.Y / 100
+            );
         } 
         else if (this.resolucion_pixeles.Equals(new Vector2(800, 800)))
         {
-            return caja_visible_metros.Position + (posicion_pixeles / 200);
+            return caja_visible_metros.Position + new Vector2(
+                posicion_pixeles.X / 200,
+                posicion_pixeles.Y / 200
+            );
         } else
         {
             throw new NotImplementedException();
