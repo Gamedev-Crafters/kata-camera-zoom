@@ -65,16 +65,6 @@ public class KataTests
     //     // nuestro viewport es igual a ...;
     // }
 
-    // [Test]
-    // public void PixelesYMetros()
-    // {
-    //     Bounds2 cuadrado_metros = new Bounds2( position: new Vector2(3, 4), size: new Vector2(1, 1) );
-    //     Viewport viewport = new Viewport( new Bounds2(new Vector2(2, 4), new Vector2(4, 4)) );
-    //     Bounds2 cuadrado_pixeles = viewport.pixelesFromMetros(cuadrado_metros);
-    //     Assert.That(cuadrado_pixeles.Size, Is.EqualTo(new Vector2(100, 100)));
-    //     Assert.That(cuadrado_pixeles.Position, Is.EqualTo(new Vector2(100, 0)));
-    // }
-
     [Test]
     public void MetrosYPixeles()
     {
@@ -174,16 +164,17 @@ public class KataTests
         Assert.That(actual_metros, Is.EqualTo(expected_metros));
     }
 
-    // [Test]
-    // public void MetrosYPixeles2()
-    // {
-    //     Vector2 resolution = new Vector2(400, 400);
-    //     Viewport viewport = new Viewport( new Bounds2(new Vector2(4, 4), new Vector2(2, 4)) );
-    //     Vector2 posicion_pixeles = new Vector2(200, 200);
-    //     Vector2 expected_metros = new Vector2(5, 5);
-    //     Vector2 actual_metros = viewport.metrosFromPixeles(posicion_pixeles);
-    //     Assert.That(actual_metros, Is.EqualTo(expected_metros));
-    // }
+    [Test]
+    public void PixelesYMetros()
+    {
+        Vector2 resolution = new Vector2(400, 400);
+        Viewport viewport = new Viewport( new Bounds2(new Vector2(2, 4), new Vector2(4, 4)), resolution);
+        Vector2 posicion_metros = new Vector2(3, 4);
+        Vector2 expected_pixeles = new Vector2(100, 0);
+        Vector2 actual_pixeles = viewport.computePixelesFromMetros(posicion_metros);
+        Assert.That(actual_pixeles, Is.EqualTo(expected_pixeles));
+    }
+
 }
 
 internal class Viewport
@@ -206,7 +197,7 @@ internal class Viewport
         );
     }
 
-    internal Bounds2 computePixelesFromMetros(Bounds2 cuadrado_metros)
+    internal Vector2 computePixelesFromMetros(Vector2 cuadrado_metros)
     {
         throw new NotImplementedException();
     }
