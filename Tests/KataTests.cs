@@ -16,9 +16,9 @@ public class KataTests
     [Test]
     public void SeModificaRenderDelCuadrado()
     {
-        // tenemos un cuadrado de 1x1 en metros;
+        Bounds2 cuadrado_metros = new Bounds2( position: new Vector2(0, 0), size: new Vector2(1, 1) );
         // se ve como 100x100px;
-        // el raton esta en 0, 0;
+        Vector2 raton_pixeles = new Vector2(0, 0);
         // nos acercamos en un 200%;
         // se ve el doble de grande;
         //  para comprobarlo: mirar el color de las 4 esquinas
