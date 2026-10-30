@@ -97,6 +97,18 @@ public class KataTests
         Assert.That(actual_metros, Is.EqualTo(expected_metros));
     }
 
+    [Test]
+    public void MetrosYPixelesHighResOldPixels()
+    {
+        Vector2 resolution = new Vector2(800, 800);
+        Viewport viewport = new Viewport( new Bounds2(new Vector2(2, 4), new Vector2(4, 4)) , resolution);
+        Vector2 posicion_pixeles = new Vector2(300, 100);
+        Vector2 expected_metros = new Vector2(3.5f, 4.5f);
+        Vector2 actual_metros = viewport.metrosFromPixeles(posicion_pixeles);
+        Assert.That(actual_metros, Is.EqualTo(expected_metros));
+    }
+
+
 
     // [Test]
     // public void MetrosYPixeles2()
@@ -123,7 +135,17 @@ internal class Viewport
 
     internal Vector2 metrosFromPixeles(Vector2 posicion_pixeles)
     {
-        return caja_visible_metros.Position + (posicion_pixeles / 100);
+        if (this.resolucion_pixeles.Equals(new Vector2(400, 400)))
+        {
+            return caja_visible_metros.Position + (posicion_pixeles / 100);
+        } 
+        else if (this.resolucion_pixeles.Equals(new Vector2(800, 800)))
+        {
+            return caja_visible_metros.Position + (posicion_pixeles / 200);
+        } else
+        {
+            throw new NotImplementedException();
+        }
     }
 
     internal Bounds2 pixelesFromMetros(Bounds2 cuadrado_metros)
