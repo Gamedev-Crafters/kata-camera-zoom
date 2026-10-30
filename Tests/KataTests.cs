@@ -188,6 +188,17 @@ internal class Viewport
             }
         }
         else if (this.caja_visible_metros.Size.Equals(new Vector2(2, 2))) {
+
+
+
+
+
+
+
+
+
+
+
             if (this.resolucion_pixeles.Equals(new Vector2(400, 400)))
             {
                 return caja_visible_metros.Position + new Vector2(
@@ -198,10 +209,20 @@ internal class Viewport
             else if (this.resolucion_pixeles.Equals(new Vector2(800, 800)))
             {
                 return caja_visible_metros.Position + new Vector2(
-                    1,
-                    2
+                    posicion_pixeles.X / 400,
+                    posicion_pixeles.Y / 400
                 );
             } 
+
+
+
+
+
+
+
+
+
+
         }
         throw new NotImplementedException();
     }
