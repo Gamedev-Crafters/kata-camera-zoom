@@ -199,21 +199,11 @@ internal class Viewport
 
     internal Vector2 metrosFromPixeles(Vector2 posicion_pixeles)
     {
-        if (this.resolucion_pixeles.X == this.resolucion_pixeles.Y) {
-            float divisor = this.resolucion_pixeles.X / caja_visible_metros.Size.X;
-            return caja_visible_metros.Position + new Vector2(
-                posicion_pixeles.X / divisor,
-                posicion_pixeles.Y / divisor
-            );
-        }
-        else if (this.resolucion_pixeles.Equals(new Vector2(400, 800))) {
-            float divisor = this.resolucion_pixeles.X / caja_visible_metros.Size.X;
-            return caja_visible_metros.Position + new Vector2(
-                posicion_pixeles.X / divisor,
-                posicion_pixeles.Y / divisor
-            );
-        }
-        throw new NotImplementedException();
+        float divisor = this.resolucion_pixeles.X / caja_visible_metros.Size.X;
+        return caja_visible_metros.Position + new Vector2(
+            posicion_pixeles.X / divisor,
+            posicion_pixeles.Y / divisor
+        );
     }
 
     internal Bounds2 pixelesFromMetros(Bounds2 cuadrado_metros)
