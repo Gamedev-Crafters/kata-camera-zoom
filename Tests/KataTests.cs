@@ -188,41 +188,13 @@ internal class Viewport
             }
         }
         else if (this.caja_visible_metros.Size.Equals(new Vector2(2, 2))) {
-
-
-
-
-
-
-
-
-
-
-
-            if (this.resolucion_pixeles.Equals(new Vector2(400, 400)))
-            {
+            if (this.resolucion_pixeles.X == this.resolucion_pixeles.Y) {
+                float divisor = this.resolucion_pixeles.X / 2;
                 return caja_visible_metros.Position + new Vector2(
-                    posicion_pixeles.X / 200,
-                    posicion_pixeles.Y / 200
+                    posicion_pixeles.X / divisor,
+                    posicion_pixeles.Y / divisor
                 );
-            } 
-            else if (this.resolucion_pixeles.Equals(new Vector2(800, 800)))
-            {
-                return caja_visible_metros.Position + new Vector2(
-                    posicion_pixeles.X / 400,
-                    posicion_pixeles.Y / 400
-                );
-            } 
-
-
-
-
-
-
-
-
-
-
+            }
         }
         throw new NotImplementedException();
     }
