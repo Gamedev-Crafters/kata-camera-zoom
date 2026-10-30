@@ -17,10 +17,11 @@ public class KataTests
     public void SeModificaRenderDelCuadrado()
     {
         Bounds2 cuadrado_metros = new Bounds2( position: new Vector2(0, 0), size: new Vector2(1, 1) );
-        // Viewport viewport = ...?;
+        Viewport viewport = new Viewport();
 
         // checkeamos por si acaso, no es estrictamente el test
-        Bounds2 cuadrado_pixeles = viewport.pixelesFromMetros(cuadrado_metros);
+        // Bounds2 cuadrado_pixeles = viewport.pixelesFromMetros(cuadrado_metros);
+        Vector2 size_cuadrado_pixeles = viewport.getSizeInPixels(cuadrado_metros);
         Assert.That(cuadrado_pixeles.Size, Is.EqualTo(new Vector2(100, 100)));
         Assert.That(cuadrado_pixeles.Position, Is.EqualTo(new Vector2(0, 0)));
 
@@ -62,5 +63,30 @@ public class KataTests
         // nos acercamos en un 200%;
         // nuestro viewport incluye ..., no incluye ...
         // nuestro viewport es igual a ...;
+    }
+
+    [Test]
+    public void PixelesYMetros()
+    {
+        Bounds2 cuadrado_metros = new Bounds2( position: new Vector2(3, 4), size: new Vector2(1, 1) );
+        Viewport viewport = new Viewport( new Bounds2(new Vector2(2, 4), new Vector2(4, 4)) );
+        Bounds2 cuadrado_pixeles = viewport.pixelesFromMetros(cuadrado_metros);
+        Assert.That(cuadrado_pixeles.Size, Is.EqualTo(new Vector2(100, 100)));
+        Assert.That(cuadrado_pixeles.Position, Is.EqualTo(new Vector2(100, 0)));
+    }
+}
+
+internal class Viewport
+{
+    Bounds2 metros_vistos;
+
+    public Viewport(Bounds2 metros_vistos)
+    {
+        this.metros_vistos = metros_vistos;
+    }
+
+    internal Bounds2 pixelesFromMetros(Bounds2 cuadrado_metros)
+    {
+        throw new NotImplementedException();
     }
 }
