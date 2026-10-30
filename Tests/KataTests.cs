@@ -78,21 +78,47 @@ public class KataTests
     [Test]
     public void MetrosYPixeles()
     {
-        Viewport viewport = new Viewport( new Bounds2(new Vector2(2, 4), new Vector2(4, 4)) );
+        Vector2 resolution = new Vector2(400, 400);
+        Viewport viewport = new Viewport( new Bounds2(new Vector2(2, 4), new Vector2(4, 4)), resolution);
         Vector2 posicion_pixeles = new Vector2(300, 100);
         Vector2 expected_metros = new Vector2(5, 5);
         Vector2 actual_metros = viewport.metrosFromPixeles(posicion_pixeles);
         Assert.That(actual_metros, Is.EqualTo(expected_metros));
     }
+
+    [Test]
+    public void MetrosYPixelesHighRes()
+    {
+        Vector2 resolution = new Vector2(800, 800);
+        Viewport viewport = new Viewport( new Bounds2(new Vector2(2, 4), new Vector2(4, 4)) , resolution);
+        Vector2 posicion_pixeles = new Vector2(600, 200);
+        Vector2 expected_metros = new Vector2(5, 5);
+        Vector2 actual_metros = viewport.metrosFromPixeles(posicion_pixeles);
+        Assert.That(actual_metros, Is.EqualTo(expected_metros));
+    }
+
+
+    // [Test]
+    // public void MetrosYPixeles2()
+    // {
+    //     Vector2 resolution = new Vector2(400, 400);
+    //     Viewport viewport = new Viewport( new Bounds2(new Vector2(4, 4), new Vector2(2, 4)) );
+    //     Vector2 posicion_pixeles = new Vector2(200, 200);
+    //     Vector2 expected_metros = new Vector2(5, 5);
+    //     Vector2 actual_metros = viewport.metrosFromPixeles(posicion_pixeles);
+    //     Assert.That(actual_metros, Is.EqualTo(expected_metros));
+    // }
 }
 
 internal class Viewport
 {
     Bounds2 caja_visible_metros;
+    Vector2 resolucion_pixeles;
 
-    public Viewport(Bounds2 caja_visible_metros)
+    public Viewport(Bounds2 caja_visible_metros, Vector2 resolucion_pixeles)
     {
         this.caja_visible_metros = caja_visible_metros;
+        this.resolucion_pixeles = resolucion_pixeles;
     }
 
     internal Vector2 metrosFromPixeles(Vector2 posicion_pixeles)
