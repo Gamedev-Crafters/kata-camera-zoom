@@ -152,6 +152,17 @@ public class KataTests
         Assert.That(actual_metros, Is.EqualTo(expected_metros));
     }
 
+    [Test]
+    public void MetrosYPixeles_6()
+    {
+        Vector2 resolution = new Vector2(300, 300);
+        Viewport viewport = new Viewport( new Bounds2(new Vector2(2, 1), new Vector2(3, 3)), resolution);
+        Vector2 posicion_pixeles = new Vector2(150, 150);
+        Vector2 expected_metros = new Vector2(3.5f, 2.5f);
+        Vector2 actual_metros = viewport.metrosFromPixeles(posicion_pixeles);
+        Assert.That(actual_metros, Is.EqualTo(expected_metros));
+    }
+
 
     // [Test]
     // public void MetrosYPixeles2()
