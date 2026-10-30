@@ -16,10 +16,6 @@ class Game
         // clear the screen
         Engine.DrawRectSolid(new Bounds2(Vector2.Zero, Engine.Resolution), Color.Gray);
 
-        Bounds2 flor_metros = new Bounds2(0,0,1,1);
-
-        Bounds2 flor_pixeles = ...;
-
         Bounds2 rect = new Bounds2(new Vector2(100, 100), new Vector2(200, 200));
 
         Color color = DoBoundsContainPoint(rect, Engine.MousePosition) ? Color.Orange : Color.Red;
