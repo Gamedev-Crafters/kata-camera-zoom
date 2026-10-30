@@ -97,8 +97,7 @@ internal class Viewport
 
     internal Vector2 metrosFromPixeles(Vector2 posicion_pixeles)
     {
-        return posicion_pixeles / 100;
-        // throw new NotImplementedException();
+        return caja_visible_metros.Position + (posicion_pixeles / 100);
     }
 
     internal Bounds2 pixelesFromMetros(Bounds2 cuadrado_metros)
