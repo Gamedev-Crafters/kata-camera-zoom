@@ -147,23 +147,11 @@ internal class Viewport
     {
         if (this.caja_visible_metros.Size.Equals(new Vector2(4, 4))) {
             if (this.resolucion_pixeles.X == this.resolucion_pixeles.Y) {
-            float divisor;
-            if (this.resolucion_pixeles.Equals(new Vector2(400, 400)))
-            {
-                divisor = 100;
-            } 
-            else if (this.resolucion_pixeles.Equals(new Vector2(800, 800)))
-            {
-                divisor = 200;
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-            return caja_visible_metros.Position + new Vector2(
-                posicion_pixeles.X / divisor,
-                posicion_pixeles.Y / divisor
-            );
+                float divisor = resolucion_pixeles.X / caja_visible_metros.Size.X;
+                return caja_visible_metros.Position + new Vector2(
+                    posicion_pixeles.X / divisor,
+                    posicion_pixeles.Y / divisor
+                );
             }
         }
         else if (this.caja_visible_metros.Size.Equals(new Vector2(2, 2))) {
